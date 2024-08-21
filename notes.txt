@@ -1,0 +1,177 @@
+https://github.com/FrontendMasters/teachers/tree/main/wendel
+
+https://frontendmasters.com/teachers/prep/
+
+https://github.com/btholt/next-course-starter
+
+https://btholt.github.io/next-course-starter
+
+https://frontendmasters.com/workshops/fullstack-vanilla-js/
+
+
+---
+
+
+Initial Template
+    - Single Page
+        - Form
+        - List
+    - CLI
+        - Create from file
+        - List Blessed
+
+
+Parts
+    - Refactor it to Modules
+
+Commonjs vs ESM
+    - Story about ESM
+    - script tag, require, module.exports
+    - sync
+    - ESM
+        - await import
+        - import('url')
+
+Mastering ECMAScript Modules first our
+    - Exports (default, obj, function and const)
+    - Html and Node.js
+
+
+---
+
+### Day 1
+
+#### 9:30AM - Day 1 Introduction
+- **Objective**: Set the stage for the workshop, explaining the importance of mastering modern JavaScript, especially in a world where bundlers and heavy frameworks might not always be necessary.
+- **Content**:
+  - Overview of the JavaScript ecosystem.
+  - Key goals for the workshop.
+  - Tools and setup needed for the workshop.
+
+#### 10:00AM - Mastering ECMAScript Modules
+- **Objective**: Deep dive into ECMAScript Modules (ESM), the native module system in JavaScript.
+- **Content**:
+  - Introduction to ESM: What are they and why they matter.
+  - Syntax and usage (import/export).
+  - Benefits of ESM over other module systems.
+  - Practical examples of ESM in a browser and Node.js environment.
+
+#### 11:00AM - CommonJS vs ESM
+- **Objective**: Understand the differences and use cases for CommonJS and ESM.
+- **Content**:
+  - Historical context: Why CommonJS was developed and its role in Node.js.
+  - Comparison of syntax, features, and performance.
+  - Practical scenarios where each is more applicable.
+  - How to transition from CommonJS to ESM in existing projects.
+
+#### 11:30AM - ESM Imports and Dynamic Imports
+- **Objective**: Explore advanced import techniques with ESM.
+- **Content**:
+  - Static vs Dynamic imports: Use cases and benefits.
+  - How dynamic imports can improve performance.
+  - Example: Loading modules conditionally.
+  - Lazy loading and its impact on performance.
+
+#### 12:00PM - Lunch Break
+
+#### 1:00PM - Testing JavaScript with the Native Node.js Test Runner
+- **Objective**: Introduce testing in Node.js using the built-in test runner.
+- **Content**:
+  - Introduction to the Node.js native test runner.
+  - Writing and organizing tests.
+  - Testing modules: Unit tests for ESM.
+  - Demo: Writing a test for a small module.
+
+#### 2:00PM - Advanced Module Importing
+- **Objective**: Cover complex scenarios in module importing.
+- **Content**:
+  - Circular dependencies: How to handle them.
+  - Importing JSON, CSS, and other assets as modules.
+  - Strategies for dealing with large module ecosystems.
+  - Demo: Handling complex module imports in a real-world app.
+
+#### 3:00PM - Writing Web Apps without Bundlers
+- **Objective**: Show how to build web applications without relying on bundlers like Webpack.
+- **Content**:
+  - Introduction to the native browser support for ESM.
+  - How to structure a project to avoid the need for bundling.
+  - Demo: Building a simple web app using only native modules.
+  - Discuss tools like `esbuild` and `Vite` for light bundling if needed.
+
+#### 4:00PM - Day 1 Recap and Q&A
+- **Objective**: Reinforce learning and address any questions.
+- **Content**:
+  - Quick review of the day's topics.
+  - Open floor for questions.
+  - Discuss any challenges participants faced.
+
+### Day 2
+
+#### 9:30AM - Day 2 Introduction
+- **Objective**: Reconnect and set the focus for the second day.
+- **Content**:
+  - Brief recap of Day 1.
+  - Overview of what will be covered today.
+
+#### 10:00AM - Writing CLI Apps using Node.js
+- **Objective**: Teach how to build Command Line Interface (CLI) applications using Node.js.
+- **Content**:
+  - Introduction to CLI development in Node.js.
+  - Parsing arguments, reading input, and handling output.
+  - Building a simple CLI tool step by step.
+  - Enhancing the CLI with additional features like configuration files.
+
+#### 11:00AM - Efficient Server-Client Code Sharing
+- **Objective**: Explore techniques for sharing code between server and client environments.
+- **Content**:
+  - Identifying reusable code (e.g., validation logic, utility functions).
+  - Strategies for maintaining a single source of truth.
+  - Implementing shared code using modules.
+  - Demo: Sharing code between a Node.js backend and a front-end app.
+
+#### 11:30AM - Sharing Validation and Entity Layers
+- **Objective**: Focus on sharing more complex layers, like validation and entity definitions.
+- **Content**:
+  - Designing entities that work across both environments.
+  - How to share validation logic between server and client.
+  - Example: Implementing and using shared validation functions.
+
+#### 12:00PM - Lunch Break
+
+#### 1:00PM - Design Patterns for Universal Apps
+- **Objective**: Introduce design patterns that support universal JavaScript apps.
+- **Content**:
+  - Overview of common design patterns (e.g., Singleton, Factory, Proxy).
+  - Specific patterns useful for universal (isomorphic) JavaScript.
+  - Example: Implementing a pattern in a shared codebase.
+  - Discuss the separation of concerns in universal applications.
+
+#### 2:00PM - Deploying the CLI App on an npm Registry
+- **Objective**: Guide participants through the process of publishing a CLI app to npm.
+- **Content**:
+  - Preparing your CLI app for publishing.
+  - Setting up `package.json` correctly.
+  - Publishing to npm and versioning.
+  - Demo: Publishing a simple CLI tool and installing it globally.
+
+#### 3:00PM - Deploying the Web App on GitHub Pages
+- **Objective**: Show how to deploy a web app directly to GitHub Pages.
+- **Content**:
+  - Overview of GitHub Pages and how it works.
+  - Configuring a project for GitHub Pages.
+  - Automating deployment with GitHub Actions.
+  - Demo: Deploying the web app built on Day 1.
+
+#### 4:00PM - Course Recap and Q&A
+- **Objective**: Conclude the workshop with a recap and open Q&A.
+- **Content**:
+  - Summary of key topics covered across both days.
+  - Open floor for questions and discussions.
+  - Collect feedback for future workshops.
+
+### Additional Tips:
+- **Hands-On Demos**: Throughout the workshop, make sure to include live coding sessions where you build and deploy examples in real-time. This makes the concepts more tangible and easier to understand.
+- **Interactive Exercises**: After each major topic, consider giving participants a short exercise to apply what they've learned. This could be something they try on their own or in small groups if the workshop is interactive.
+- **Provide Resources**: At the end of each day, share links to resources, documentation, and examples that participants can explore on their own time.
+
+This approach should ensure that participants not only learn about advanced JavaScript topics but also get practical experience applying them in real-world scenarios.
