@@ -51,7 +51,7 @@ export default class LayoutBuilder {
             top,
             left: 'center',
             width: '60%',
-            height: 3,
+            height: '20%',
             border: { type: 'line' },
             style: {
                 fg: 'white',
@@ -101,9 +101,9 @@ export default class LayoutBuilder {
             }
         });
 
-        const nameInput = this.#createInputField({ parent: form, name: 'name', top: 2, label: 'Name:' });
-        const ageInput = this.#createInputField({ parent: form, name: 'age', top: 6, label: 'Age:' });
-        const emailInput = this.#createInputField({ parent: form, name: 'email', top: 10, label: 'Email:' });
+        const nameInput = this.#createInputField({ parent: form, name: 'name', top: 1, label: 'Name:' });
+        const ageInput = this.#createInputField({ parent: form, name: 'age', top: 4, label: 'Age:' });
+        const emailInput = this.#createInputField({ parent: form, name: 'email', top: 7, label: 'Email:' });
 
         const submitButton = this.#createButton({
             parent: form,
@@ -112,7 +112,7 @@ export default class LayoutBuilder {
             bg: 'green',
             fg: 'white',
             left: 'center',
-            bottom: 0
+            bottom: 1
         });
 
         const clearButton = this.#createButton({
@@ -122,7 +122,7 @@ export default class LayoutBuilder {
             bg: 'red',
             fg: 'white',
             left: '55%',
-            bottom: 0
+            bottom: 1
         });
 
         submitButton.on('press', () => form.submit());
@@ -176,9 +176,12 @@ export default class LayoutBuilder {
 
     setTable(template) {
         const numColumns = template.headers.length;
-        const totalWidth = 100;
-        const columnSpacing = 1;
-        const columnWidth = Math.floor((totalWidth - (numColumns - 1) * columnSpacing) / numColumns);
+
+        const calculateColumnWidth = () => Math.floor(this.#layout.width / numColumns);
+        const columnWidth = calculateColumnWidth();
+
+        const minColumnWidth = 10; // Minimum column width in pixels
+        const columnWidths = Array(numColumns).fill(columnWidth).map(width => Math.max(width, minColumnWidth));
 
         this.#table = contrib.table({
             ...this.#baseComponent(),
@@ -189,13 +192,13 @@ export default class LayoutBuilder {
             selectedBg: 'blue',
             interactive: true,
             label: 'Users',
-            width: '100%',
-            height: '50%',
-            top: '40%',
-            left: 'center',
+            width: '100%',  // Full width of the parent container
+            height: '50%',  // Adjust height as needed
+            top: '0',
+            left: '0',      // Adjust positioning as needed
             border: { type: 'line', fg: 'cyan' },
-            columnSpacing,
-            columnWidth: Array(numColumns).fill(columnWidth)
+            columnSpacing: 2, // Adjust spacing between columns
+            columnWidth: columnWidths
         });
 
         this.#table.setData({
@@ -205,6 +208,8 @@ export default class LayoutBuilder {
 
         return this;
     }
+
+
 
     build() {
         const components = {
