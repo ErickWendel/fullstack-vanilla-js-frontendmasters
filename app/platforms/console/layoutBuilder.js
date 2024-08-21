@@ -2,11 +2,11 @@ import blessed from 'blessed';
 import contrib from 'blessed-contrib';
 
 export default class LayoutBuilder {
-    #screen
-    #layout
-    #input
-    #table
-    #form
+    #screen;
+    #layout;
+    #input;
+    #table;
+    #form;
 
     #baseComponent() {
         return {
@@ -22,11 +22,51 @@ export default class LayoutBuilder {
         };
     }
 
+    #createButton({ parent, name, content, bg, fg, left, bottom }) {
+        return blessed.button({
+            parent,
+            mouse: true,
+            keys: true,
+            shrink: true,
+            padding: { left: 1, right: 1 },
+            left,
+            bottom,
+            width: 'shrink',
+            name,
+            content,
+            style: {
+                bg,
+                fg,
+                focus: { bg: `light${bg}` },
+                hover: { bg: `light${bg}` }
+            }
+        });
+    }
+
+    #createInputField({ parent, name, top, label }) {
+        return blessed.textbox({
+            parent,
+            name,
+            inputOnFocus: true,
+            top,
+            left: 'center',
+            width: '60%',
+            height: 3,
+            border: { type: 'line' },
+            style: {
+                fg: 'white',
+                bg: 'blue',
+                focus: { bg: 'lightblue' }
+            },
+            label
+        });
+    }
+
     setLayoutComponent() {
         this.#layout = blessed.layout({
             parent: this.#screen,
             width: '100%',
-            height: '100%',
+            height: '100%'
         });
 
         return this;
@@ -48,102 +88,44 @@ export default class LayoutBuilder {
             parent: this.#layout,
             keys: true,
             vi: false,
-            width: '100%', // Set form width to 100%
-            height: '40%', // Adjust height to fit within terminal
-            top: '0', // Align to top
-            left: 'center', // Align to center horizontally
+            width: '100%',
+            height: '40%',
+            top: '0',
+            left: 'center',
             bg: 'green',
             label: 'User Form',
-            border: {
-                type: 'line'
-            },
+            border: { type: 'line' },
             style: {
                 fg: 'white',
-                bg: 'black',
+                bg: 'black'
             }
         });
 
-        const createInputField = (name, top, label) => {
-            return blessed.textbox({
-                parent: form,
-                name: name,
-                inputOnFocus: true,
-                top: top,
-                left: 'center',
-                width: '60%', // Adjust width to fit within form
-                height: 3,
-                border: {
-                    type: 'line',
-                },
-                style: {
-                    fg: 'white',
-                    bg: 'blue',
-                    focus: { bg: 'lightblue' }
-                },
-                label: label
-            });
-        };
+        const nameInput = this.#createInputField({ parent: form, name: 'name', top: 2, label: 'Name:' });
+        const ageInput = this.#createInputField({ parent: form, name: 'age', top: 6, label: 'Age:' });
+        const emailInput = this.#createInputField({ parent: form, name: 'email', top: 10, label: 'Email:' });
 
-        const nameInput = createInputField('name', 2, 'Name:');
-        const ageInput = createInputField('age', 6, 'Age:');
-        const emailInput = createInputField('email', 10, 'Email:');
-
-        const submitButton = blessed.button({
+        const submitButton = this.#createButton({
             parent: form,
-            mouse: true,
-            keys: true,
-            shrink: true,
-            padding: {
-                left: 1,
-                right: 1
-            },
-            left: '40%',
-            bottom: 0,
-            width: 'shrink',
             name: 'submit',
             content: 'Submit',
-            style: {
-                bg: 'green',
-                fg: 'white',
-                focus: {
-                    bg: 'lightgreen'
-                },
-                hover: {
-                    bg: 'lightgreen'
-                }
-            }
+            bg: 'green',
+            fg: 'white',
+            left: 'center',
+            bottom: 0
         });
 
-        const clearButton = blessed.button({
+        const clearButton = this.#createButton({
             parent: form,
-            mouse: true,
-            keys: true,
-            shrink: true,
-            padding: {
-                left: 1,
-                right: 1
-            },
-            bottom: 0,
-            left: '55%', // Add spacing between buttons
-            width: 'shrink',
             name: 'clear',
             content: 'Clear',
-            style: {
-                bg: 'red',
-                fg: 'white',
-                focus: {
-                    bg: 'lightred'
-                },
-                hover: {
-                    bg: 'lightred'
-                }
-            }
+            bg: 'red',
+            fg: 'white',
+            left: '55%',
+            bottom: 0
         });
 
-        submitButton.on('press', () => {
-            form.submit();
-        });
-
+        submitButton.on('press', () => form.submit());
         clearButton.on('press', () => {
             form.reset();
             nameInput.focus(); // Refocus on the first input field after clearing
@@ -194,8 +176,8 @@ export default class LayoutBuilder {
 
     setTable(template) {
         const numColumns = template.headers.length;
-        const totalWidth = 100; // Percentage of terminal width allocated to the table
-        const columnSpacing = 1; // Space between columns
+        const totalWidth = 100;
+        const columnSpacing = 1;
         const columnWidth = Math.floor((totalWidth - (numColumns - 1) * columnSpacing) / numColumns);
 
         this.#table = contrib.table({
@@ -207,13 +189,13 @@ export default class LayoutBuilder {
             selectedBg: 'blue',
             interactive: true,
             label: 'Users',
-            width: '100%', // Set table width to 80% of terminal width
-            height: '50%', // Adjust height to fit within terminal
-            top: '40%', // Position below the form
-            left: 'center', // Center horizontally
-            border: { type: "line", fg: "cyan" },
-            columnSpacing: columnSpacing, // Space between columns
-            columnWidth: Array(numColumns).fill(columnWidth) // Set each column to the calculated width
+            width: '100%',
+            height: '50%',
+            top: '40%',
+            left: 'center',
+            border: { type: 'line', fg: 'cyan' },
+            columnSpacing,
+            columnWidth: Array(numColumns).fill(columnWidth)
         });
 
         this.#table.setData({
@@ -223,8 +205,6 @@ export default class LayoutBuilder {
 
         return this;
     }
-
-
 
     build() {
         const components = {
