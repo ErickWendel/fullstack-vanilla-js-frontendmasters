@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "web": "npx browser-sync .",
-    "cli": "node ui/index.js"
+    "web": "npx browser-sync './' ui/",
+    "cli": "node ui/index.js",
+    "test:dev": "node --inspect --watch --test tests/",
+    "test": "node --test tests/"
   },
   "keywords": [],
   "author": "",

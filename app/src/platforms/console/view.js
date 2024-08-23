@@ -4,10 +4,13 @@ import LayoutBuilder from "./layoutBuilder.js"
 export default class View extends ViewBase {
     #components
     #headers = []
-    #firstRender = true
-    #data = []  // Store the data submitted through the form
-    #onSearch = () => { }
+    #data = []
+    #layoutBuilder
 
+    constructor(layoutBuilder = new LayoutBuilder()) {
+        super()
+        this.#layoutBuilder = layoutBuilder
+    }
 
     #prepareData(data) {
         if (!data.length) {
@@ -33,7 +36,6 @@ export default class View extends ViewBase {
     }
 
     #handleFormSubmit = (formData) => {
-        // Add the new form data to the list
         this.#data.push(formData)
         this.#updateTable(this.#data)
     }
@@ -41,24 +43,15 @@ export default class View extends ViewBase {
     configureFormSubmit(fn) { }
 
     render(data) {
-        // Initialize the data with the initial data passed to render
         this.#data = data;
 
-        // if (!this.#firstRender) {
-        //     this.#updateTable(data);
-        //     return;
-        // }
-
         const template = this.#prepareData(data)
-        const layout = new LayoutBuilder()
 
-        this.#components = layout
+        this.#components = this.#layoutBuilder
             .setScreen({ title: 'Design Patterns with Erick Wendel' })
             .setLayoutComponent()
             .setFormComponent(this.#handleFormSubmit)  // Add form handling
             .setTable(template)
             .build()
-
-        this.#firstRender = false
     }
 }
