@@ -20,8 +20,11 @@ describe('Controller Test Suite', () => {
     });
 
     it('my test', async (context) => {
-        await Controller.init({ view: new View() });
-        await Controller.init({ view: new View() });
+        const view = new View()
+        const addRow = context.mock.fn(view.addRow)
+
+        await Controller.init({ view: view });
+        await Controller.init({ view: view });
 
         // Assert that blessed.screen was called
         assert.strictEqual(blessed.screen.mock.calls.length, 2);

@@ -61,6 +61,7 @@ export default class Controller {
 
         const newData = { name, age, email }
         this.#view.addRow(newData)
+        this.#view.resetForm()
     }
 
     /**

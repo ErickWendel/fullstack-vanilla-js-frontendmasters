@@ -7,15 +7,6 @@
 
 export default class ViewBase {
     /**
-     * Initializes the view, setting up necessary configurations.
-     * This method should be called after creating an instance of the view.
-     * @returns {void}
-     */
-    init() {
-        throw new Error('not implemented!')
-    }
-
-    /**
      * Configures the form submission behavior.
      * When the form is submitted, the provided callback function is executed with the form data.
      * @param {Function} fn - The callback function to execute on form submission.

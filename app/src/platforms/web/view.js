@@ -12,14 +12,11 @@ export default class View extends ViewBase {
 
     configureFormSubmit(fn) {
         this.#form.addEventListener('submit', event => {
-            event.preventDefault() // Prevent the default form submission behavior
+            event.preventDefault()
 
-            // Extract form values
             const name = this.#form.querySelector('#name').value
             const age = this.#form.querySelector('#age').value
             const email = this.#form.querySelector('#email').value
-
-            this.resetForm()
 
             return fn({ name, age, email })
         })
@@ -35,7 +32,7 @@ export default class View extends ViewBase {
 
     configureFormClear() {
         this.#btnFormClear.addEventListener('click', () => {
-            this.#form.reset()
+            this.resetForm()
         })
     }
 

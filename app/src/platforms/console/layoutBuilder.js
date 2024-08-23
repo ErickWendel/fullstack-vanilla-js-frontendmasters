@@ -4,9 +4,10 @@ import contrib from 'blessed-contrib';
 export default class LayoutBuilder {
     #screen;
     #layout;
-    #input;
     #table;
     #form;
+    #inputs = {};
+    #buttons = {};
 
     #baseComponent() {
         return {
@@ -44,7 +45,7 @@ export default class LayoutBuilder {
     }
 
     #createInputField({ parent, name, top, label }) {
-        return blessed.textbox({
+        const input = blessed.textbox({
             parent,
             name,
             inputOnFocus: true,
@@ -60,6 +61,12 @@ export default class LayoutBuilder {
             },
             label
         });
+
+        // input.on('click', () => {
+        //     input.focus()
+        //     this.#screen.render();
+        // });
+        return input
     }
 
     setLayoutComponent() {
@@ -83,7 +90,10 @@ export default class LayoutBuilder {
         return this;
     }
 
-    setFormComponent(onSubmit) {
+    setFormComponent({
+        onSubmit,
+        onClear,
+    }) {
         const form = blessed.form({
             parent: this.#layout,
             keys: true,
@@ -126,30 +136,14 @@ export default class LayoutBuilder {
         });
 
         submitButton.on('press', () => form.submit());
-        clearButton.on('press', () => {
-            form.reset();
-            nameInput.focus(); // Refocus on the first input field after clearing
-        });
+        clearButton.on('press', () => onClear());
 
-        form.on('submit', (data) => {
-            onSubmit(data);
-            form.reset();
-            nameInput.focus(); // Refocus on the first input field after submission
-            this.#screen.render();
-        });
+        form.on('submit', (data) => onSubmit(data));
 
-        // Set focus to the first input when the form is created
         nameInput.focus();
 
-        // Handle focus on click
-        [nameInput, ageInput, emailInput].forEach(el => {
-            el.on('click', () => el.focus());
-        });
-
-        // Handle Enter key to move focus to the next field
         form.key(['enter'], (ch, key) => {
             form.focusNext();
-            this.#screen.render();
         });
 
         // Handle Tab key to navigate form fields
@@ -159,17 +153,14 @@ export default class LayoutBuilder {
             } else {
                 form.focusPrevious();
             }
-            this.#screen.render();
-        });
-
-        // Handle Escape key to reset form
-        form.key(['escape'], () => {
-            form.reset();
-            nameInput.focus();
-            this.#screen.render();
         });
 
         this.#form = form;
+        this.#inputs.name = nameInput
+        this.#inputs.age = ageInput
+        this.#inputs.email = emailInput
+        this.#buttons.clear = clearButton
+        this.#buttons.submit = submitButton
 
         return this;
     }
@@ -209,17 +200,15 @@ export default class LayoutBuilder {
         return this;
     }
 
-
-
     build() {
         const components = {
             screen: this.#screen,
-            input: this.#input,
             table: this.#table,
-            form: this.#form
+            form: this.#form,
+            inputs: this.#inputs,
+            buttons: this.#buttons,
         };
 
-        this.#input?.focus();
         this.#screen.render();
 
         return components;

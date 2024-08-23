@@ -6,6 +6,8 @@ export default class View extends ViewBase {
     #headers = []
     #data = []
     #layoutBuilder
+    #onFormClear = (fn) => { }
+    #onFormSubmit = (fn) => { }
 
     constructor(layoutBuilder = new LayoutBuilder()) {
         super()
@@ -27,20 +29,39 @@ export default class View extends ViewBase {
         }
     }
 
-    #updateTable(data) {
-        const template = this.#prepareData(data)
+    addRow(data) {
+        this.#data.push(data)
+        const template = this.#prepareData(this.#data)
         this.#components.table.setData({
             headers: template.headers,
             data: template.data
         })
+        this.#components.screen.render();
     }
 
-    #handleFormSubmit = (formData) => {
-        this.#data.push(formData)
-        this.#updateTable(this.#data)
+
+    resetForm() {
+        const form = this.#components.form
+        form.reset();
+        this.#components.screen.render();
     }
-    configureFormClear() { }
-    configureFormSubmit(fn) { }
+
+    notify({ msg, isError }) {
+        // console.log({ msg, isError })
+    }
+
+    configureFormClear() {
+        this.#onFormClear = () => {
+            this.#components.form.reset()
+
+        }
+    }
+
+    configureFormSubmit(fn) {
+        this.#onFormSubmit = (formData) => {
+            return fn(formData)
+        }
+    }
 
     render(data) {
         this.#data = data;
@@ -48,9 +69,12 @@ export default class View extends ViewBase {
         const template = this.#prepareData(data)
 
         this.#components = this.#layoutBuilder
-            .setScreen({ title: 'Design Patterns with Erick Wendel' })
+            .setScreen({ title: 'Fullstack vanilla JS - Erick Wendel' })
             .setLayoutComponent()
-            .setFormComponent(this.#handleFormSubmit)  // Add form handling
+            .setFormComponent({
+                onSubmit: this.#onFormSubmit,
+                onClear: this.#onFormClear,
+            })
             .setTable(template)
             .build()
     }
