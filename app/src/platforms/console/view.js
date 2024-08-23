@@ -39,7 +39,6 @@ export default class View extends ViewBase {
         this.#components.screen.render();
     }
 
-
     resetForm() {
         const form = this.#components.form
         form.reset();
