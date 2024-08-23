@@ -1,0 +1,56 @@
+Initial Template
+    app
+        - src
+            - platforms
+                - console
+                    view.js
+                        console.log
+                - web
+                    view.js
+                        console.log
+            - shared
+                - viewBase.js
+
+        ui
+            - index.html
+                - with HTML Only
+            - index.js
+                - with console.log
+Day 01
+    - Intro
+        - what?
+        - final demo
+        - pre reqs
+            - nodejs 22 (current LTS)
+            - vscode
+
+    - Commonjs
+        - slides
+        - Problem HTML vs JS Runtimes
+
+    - ESM
+        - slides
+        - async / JS Spec / dynamic
+
+    - ESM Imports and Dynamic Imports
+        - demo
+            show HTML
+                refer index.js as a module
+            npm run web
+            > show form
+
+            - change ui/index.js
+                add dynamic import
+
+            > web should print hi from web
+            console.log('Hi from web')
+            npm run cli
+                console.log('Hi from Node.js')
+
+    - Abstract Factory Design Pattern
+        - slides
+            - show iPhone and Android analogy
+        -
+
+Day 02
+    - .vscode
