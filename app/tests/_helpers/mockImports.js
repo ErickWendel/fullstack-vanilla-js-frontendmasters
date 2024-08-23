@@ -42,14 +42,14 @@ function createFnsAndPropertiesDynamically(originalObject) {
                 return true;
             }
 
-            target[property] = new Proxy(value, this);
+            target[property] = createFnsAndPropertiesDynamically(value)
             return true;
         },
         apply(target, thisArg, argumentsList) {
             return createAndApplySpy(
                 target,
                 target.name,
-                (...args) => new Proxy(target, this)
+                (...args) => createFnsAndPropertiesDynamically(target)
             ).apply(this, argumentsList);
         }
     });
