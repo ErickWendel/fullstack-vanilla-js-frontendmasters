@@ -26,7 +26,7 @@ export default class Controller {
      * @param {string} data.email - The email to validate.
      * @returns {boolean} `true` if all fields are valid, otherwise `false`.
      */
-    isValid(data) {
+    #isValid(data) {
         return data.name && data.age && data.email
     }
 
@@ -49,9 +49,9 @@ export default class Controller {
      * @param {string} formData.email - The email from the form.
      * @returns {boolean} `true` if the submission is valid and processed, otherwise `false`.
      */
-    onSubmit({ name, age, email }) {
+    #onSubmit({ name, age, email }) {
 
-        if (!this.isValid({ name, age, email })) {
+        if (!this.#isValid({ name, age, email })) {
             this.#view.notify({
                 msg: 'Invalid input',
                 isError: true
@@ -69,7 +69,7 @@ export default class Controller {
      * @returns {Promise<void>}
      */
     async #init() {
-        this.#view.configureFormSubmit(this.onSubmit.bind(this))
+        this.#view.configureFormSubmit(this.#onSubmit.bind(this))
         this.#view.configureFormClear()
 
         const initialData = [
