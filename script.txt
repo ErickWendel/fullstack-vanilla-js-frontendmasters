@@ -18,11 +18,18 @@ Initial Template
                 - with console.log
 Day 01
     - Intro
+        - slides
         - what?
         - final demo
         - pre reqs
             - nodejs 22 (current LTS)
             - vscode
+
+    - Abstract Factory Design Pattern
+        - slides
+            - show iPhone and Android analogy
+        - clone project
+            - show structure
 
     - Commonjs
         - slides
@@ -47,10 +54,7 @@ Day 01
             npm run cli
                 console.log('Hi from Node.js')
 
-    - Abstract Factory Design Pattern
-        - slides
-            - show iPhone and Android analogy
-        -
+
 
 Day 02
     - .vscode
