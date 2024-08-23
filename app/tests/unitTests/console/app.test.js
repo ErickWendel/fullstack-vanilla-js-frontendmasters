@@ -23,13 +23,12 @@ describe('Controller Test Suite', () => {
         const resetForm = context.mock.method(view, view.resetForm.name);
 
         await Controller.init({ view: view });
-        await Controller.init({ view: view });
 
-        assert.strictEqual(screenMock.mock.callCount(), 2);
-        assert.strictEqual(tableMockMock.mock.callCount(), 2);
+        assert.strictEqual(screenMock.mock.callCount(), 1);
+        assert.strictEqual(tableMockMock.mock.callCount(), 1);
 
         const formCall = blessed.form.on.mock
-        assert.strictEqual(formCall.callCount(), 2);
+        assert.strictEqual(formCall.callCount(), 1);
 
         const onSubmit = formCall.calls[0].arguments[1]
         const data = { name: 'Erick Wendel', age: 28, email: 'e@e.com' }
