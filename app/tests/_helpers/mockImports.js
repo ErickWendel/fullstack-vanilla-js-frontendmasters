@@ -1,59 +1,62 @@
 import { mock } from 'node:test';
 
-const mockPrivateKey = Symbol('mockKey')
-const mockKey = 'mock'
+const mockPrivateKey = Symbol('mockKey');
+const mockKey = 'mock';
 
-const addSpy = (target, property, fn) => {
-    if (!target[property]) return (...args) => fn.apply(this, ...args)
+// Function to create or retrieve a spy and apply it to a method
+function createAndApplySpy(target, property, fn) {
+    let spy = target[property]?.[mockPrivateKey];
 
-    const spy = target[property][mockPrivateKey] ?? mock.fn()
-    target[property][mockPrivateKey] = spy
-    target[property][mockKey] = spy.mock
-
-    return (...args) => {
-        spy(...args)
-
-        return fn.apply(this, ...args)
+    if (!spy) {
+        spy = mock.fn();
+        target[property] = spy;
+        target[property][mockPrivateKey] = spy;
+        target[property][mockKey] = spy.mock;
     }
 
+    return (...args) => {
+        spy(...args);
+        return fn.apply(this, args);
+    };
 }
-const createFnsAndPropertiesDynamically = (originalObject) => {
+
+// Function to create a proxy with dynamic functions and properties
+function createFnsAndPropertiesDynamically(originalObject) {
     return new Proxy(originalObject || {}, {
         get(target, property) {
             if ([mockKey, mockPrivateKey].includes(property)) {
-                return target[property]
+                return target[property];
             }
 
             if (!(property in target)) {
-
-                target[property] = (...args) => {
-                    return createFnsAndPropertiesDynamically();
-                };
-
+                target[property] = mock.fn((...args) => createFnsAndPropertiesDynamically());
+                target[property][mockPrivateKey] = target[property];
+                target[property][mockKey] = target[property].mock;
             }
 
-            return (target[property]);
+            return target[property];
         },
         set(target, property, value) {
             if ([mockKey, mockPrivateKey].includes(property)) {
-                target[property] = value
-                return true
+                target[property] = value;
+                return true;
             }
 
-            target[property] = createFnsAndPropertiesDynamically(value);
+            target[property] = new Proxy(value, this);
             return true;
         },
         apply(target, thisArg, argumentsList) {
-
-            return addSpy(thisArg, target.name, (...args) => {
-                // console.log(`Function '${fnName}' was called with arguments:`, args);
-                return createFnsAndPropertiesDynamically();
-            }).apply(this, ...argumentsList);
+            return createAndApplySpy(
+                target,
+                target.name,
+                (...args) => new Proxy(target, this)
+            ).apply(this, argumentsList);
         }
     });
-};
+}
 
-const overrideModules = (modules) => {
+// Function to override modules with proxies
+function overrideModules(modules) {
     modules.forEach(originalModule => {
         Object.keys(originalModule).forEach(key => {
             originalModule[key] = createFnsAndPropertiesDynamically(originalModule[key]);
@@ -61,4 +64,4 @@ const overrideModules = (modules) => {
     });
 }
 
-export { overrideModules }
+export { overrideModules };

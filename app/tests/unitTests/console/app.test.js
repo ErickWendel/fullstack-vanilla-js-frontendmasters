@@ -11,23 +11,29 @@ import { overrideModules } from "../../_helpers/mockImports.js";
 describe('Controller Test Suite', () => {
     before(() => {
         // fix bug as the internal name is different than the prop name
-        contrib.Table = contrib.table
+        contrib.Table = contrib.table;
 
-        overrideModules([
-            blessed,
-            contrib
-        ]);
+        overrideModules([blessed, contrib]);
     });
 
     it('my test', async (context) => {
-        const view = new View()
-        const addRow = context.mock.fn(view.addRow)
+        const view = new View();
+        const addRow = context.mock.method(view, view.addRow.name);
+        const screenMock = context.mock.method(blessed, "screen")
 
         await Controller.init({ view: view });
         await Controller.init({ view: view });
 
-        // Assert that blessed.screen was called
-        assert.strictEqual(blessed.screen.mock.calls.length, 2);
-        assert.strictEqual(contrib.table.mock.calls.length, 2);
+        assert.strictEqual(screenMock.mock.callCount(), 2);
+
+        const formCall = blessed.form.on.mock
+        assert.strictEqual(formCall.callCount(), 2);
+
+        const onSubmit = formCall.calls[0].arguments[1]
+        const data = { name: 'Erick Wendel', age: 28, email: 'e@e.com' }
+        onSubmit(data)
+
+        assert.strictEqual(addRow.mock.calls.length, 1)
+
     });
 });

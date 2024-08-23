@@ -138,7 +138,9 @@ export default class LayoutBuilder {
         submitButton.on('press', () => form.submit());
         clearButton.on('press', () => onClear());
 
-        form.on('submit', (data) => onSubmit(data));
+        form.on('submit', (data) => {
+            onSubmit(data)
+        });
 
         nameInput.focus();
 
