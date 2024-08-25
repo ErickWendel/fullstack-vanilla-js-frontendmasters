@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "users-management-app": "./ui/index.js"
+    "users-management-app": "ui/index.js"
   },
   "bugs": {
-    "url": "https://github.com/ErickWendel/nodered-google-sheets-to-json-stream/issues"
+    "url": "https://github.com/ErickWendel/frontend-masters-01/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ErickWendel/nodered-google-sheets-to-json-stream.git"
+    "url": "git+https://github.com/ErickWendel/frontend-masters-01.git"
   },
   "scripts": {
     "web": "npx browser-sync './' ui/",
