@@ -1,26 +1,35 @@
 {
-  "name": "app",
+  "name": "@erickwendel/users-management-app",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "users-management-app": "./ui/index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/ErickWendel/nodered-google-sheets-to-json-stream/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErickWendel/nodered-google-sheets-to-json-stream.git"
+  },
   "scripts": {
     "web": "npx browser-sync './' ui/",
     "cli": "node ui/index.js",
+    "cli:dev": "node --inspect --watch ui/index.js",
     "test:dev": "node --inspect --watch --test tests/",
     "test": "node --test tests/"
   },
   "keywords": [],
-  "author": "",
+  "author": "erickwendel",
   "license": "ISC",
   "type": "module",
   "engines": {
-    "node": "v20.5.0"
+    "node": "v20.17.0"
   },
   "dependencies": {
     "blessed": "^0.1.81",
-    "blessed-contrib": "^4.11.0",
-    "chalk": "^5.3.0",
-    "chalk-table": "^1.0.2"
+    "blessed-contrib": "^4.11.0"
   },
   "devDependencies": {
     "browser-sync": "^2.29.3"

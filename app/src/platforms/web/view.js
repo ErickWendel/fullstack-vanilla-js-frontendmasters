@@ -4,6 +4,9 @@ export default class View extends ViewBase {
     #btnFormClear = document.querySelector('#btnFormClear')
     #form = document.querySelector('#form')
     #tableBody = document.querySelector('.flex-table')
+    #name = document.querySelector('#name')
+    #age = document.querySelector('#age')
+    #email = document.querySelector('#email')
 
     init() {
         this.configureFormSubmit()
@@ -14,9 +17,9 @@ export default class View extends ViewBase {
         this.#form.addEventListener('submit', event => {
             event.preventDefault()
 
-            const name = this.#form.querySelector('#name').value
-            const age = this.#form.querySelector('#age').value
-            const email = this.#form.querySelector('#email').value
+            const name = this.#name.value
+            const age = this.#age.value
+            const email = this.#email.value
 
             return fn({ name, age, email })
         })

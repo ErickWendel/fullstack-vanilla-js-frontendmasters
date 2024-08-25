@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import Controller from "../src/shared/controller.js"
 
 const path = globalThis.window ? 'web' : 'console'

@@ -4,11 +4,11 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Run Test Debugger",
+            "name": "Run CLI Debugger",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run",
-                "test:dev"
+                "cli:dev"
             ],
             "cwd": "${fileDirname}",
             "skipFiles": [
@@ -16,7 +16,23 @@
                 "node_modules/**/**",
             ],
             "console": "integratedTerminal"
-        }
+        },
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "Run Test Debugger",
+        //     "runtimeExecutable": "npm",
+        //     "runtimeArgs": [
+        //         "run",
+        //         "test:dev"
+        //     ],
+        //     "cwd": "${fileDirname}",
+        //     "skipFiles": [
+        //         "<node_internals>/**/**",
+        //         "node_modules/**/**",
+        //     ],
+        //     "console": "integratedTerminal"
+        // }
     ],
     "compounds": []
 }

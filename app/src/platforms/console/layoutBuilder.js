@@ -9,20 +9,6 @@ export default class LayoutBuilder {
     #inputs = {};
     #buttons = {};
 
-    #baseComponent() {
-        return {
-            border: 'line',
-            mouse: true,
-            keys: true,
-            top: 0,
-            scrollboard: {
-                ch: ' ',
-                inverse: true
-            },
-            tags: true
-        };
-    }
-
     #createButton({ parent, name, content, bg, fg, left, bottom }) {
         return blessed.button({
             parent,
@@ -114,6 +100,7 @@ export default class LayoutBuilder {
         const nameInput = this.#createInputField({ parent: form, name: 'name', top: 1, label: 'Name:' });
         const ageInput = this.#createInputField({ parent: form, name: 'age', top: 4, label: 'Age:' });
         const emailInput = this.#createInputField({ parent: form, name: 'email', top: 7, label: 'Email:' });
+        nameInput.focus();
 
         const submitButton = this.#createButton({
             parent: form,
@@ -135,27 +122,13 @@ export default class LayoutBuilder {
             bottom: 1
         });
 
+
         submitButton.on('press', () => form.submit());
-        clearButton.on('press', () => onClear());
 
         form.on('submit', (data) => {
             onSubmit(data)
         });
-
-        nameInput.focus();
-
-        form.key(['enter'], (ch, key) => {
-            form.focusNext();
-        });
-
-        // Handle Tab key to navigate form fields
-        form.key(['tab'], (ch, key) => {
-            if (!key.shift) {
-                form.focusNext();
-            } else {
-                form.focusPrevious();
-            }
-        });
+        clearButton.on('press', () => onClear());
 
         this.#form = form;
         this.#inputs.name = nameInput
@@ -177,7 +150,13 @@ export default class LayoutBuilder {
         const columnWidths = Array(numColumns).fill(columnWidth).map(width => Math.max(width, minColumnWidth));
 
         this.#table = contrib.table({
-            ...this.#baseComponent(),
+            // border: 'line',
+            mouse: true,
+            scrollboard: {
+                ch: ' ',
+                inverse: true
+            },
+            tags: true,
             parent: this.#layout,
             keys: true,
             fg: 'white',

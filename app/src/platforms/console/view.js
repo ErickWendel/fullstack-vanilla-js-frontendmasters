@@ -22,10 +22,10 @@ export default class View extends ViewBase {
             }
         }
 
-        this.#headers = Object.keys(data[0]).slice(0, 3)
+        this.#headers = Object.keys(data[0])
         return {
             headers: this.#headers,
-            data: data.map(item => Object.values(item).slice(0, 3))
+            data: data.map(item => Object.values(item))
         }
     }
 
@@ -46,13 +46,12 @@ export default class View extends ViewBase {
     }
 
     notify({ msg, isError }) {
-        // console.log({ msg, isError })
+        console.log({ msg, isError })
     }
 
     configureFormClear() {
         this.#onFormClear = () => {
             this.#components.form.reset()
-
         }
     }
 

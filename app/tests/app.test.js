@@ -1,12 +1,12 @@
-import Controller from "../../../src/shared/controller.js";
-import View from './../../../src/platforms/console/view.js';
+import Controller from "../src/shared/controller.js";
+import View from '../src/platforms/console/view.js';
 
 import { describe, it, before } from 'node:test';
 import assert from 'node:assert';
 
 import blessed from 'blessed';
 import contrib from 'blessed-contrib';
-import { overrideModules } from "../../_helpers/mockImports.js";
+import { overrideModules } from "./_helpers/mockImports.js";
 
 describe('Controller Test Suite', () => {
     before(() => {
