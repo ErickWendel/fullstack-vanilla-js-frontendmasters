@@ -29,30 +29,30 @@ In this app-oriented course, you’ll create and deploy a complete multi-platfor
 - Basic understanding of web development concepts
 - Experience with npm and GitHub
 
-
 # Fullstack Vanilla JavaScript
 
 ## Daily Schedule
 
 ### Day 1
-- 9:30AM - Day 1 Introduction
-- 10:00AM - Mastering ECMAScript Modules
-- 11:00AM - Commonjs vs ESM
-- 11:30AM - ESM Imports and Dynamic Imports
-- 12:00PM - Lunch Break
-- 1:00PM - Testing JavaScript with the Native Node.js Test Runner
-- 2:00PM - Advanced Module Importing
-- 3:00PM - Writing Web Apps without Bundlers
-- 4:00PM - Day 1 Recap and Q&A
 
+-   9:30AM - Day 1 Introduction
+-   10:00AM - Design Patterns for Universal Apps - Abstract Factory Design Pattern
+-   11:00AM - Commonjs and ECMAScript Modules
+-   11:30AM - Writing Web Apps without Bundlers
+-   12:00PM - Lunch Break
+-   1:00PM - Sharing Validation and Entity Layers
+-   2:00PM - Deploying the Web App on GitHub Pages
+-   3:00PM - Writing Web Apps without Bundlers
+-   4:00PM - Day 1 Recap and Q&A
 
 ### Day 2
-- 9:30AM - Day 2 Introduction
-- 10:00AM - Writing CLI Apps using Node.js
-- 11:00AM - Efficient Server-Client Code Sharing
-- 11:30AM - Sharing Validation and Entity Layers
-- 12:00PM - Lunch Break
-- 1:00PM - Design Patterns for Universal Apps
-- 2:00PM - Deploying the CLI App on an npm Registry
-- 3:00PM - Deploying the Web App on GitHub Pages
-- 4:00PM - Course Recap and Q&A
+
+-   9:30AM - Day 2 Introduction
+-   10:00AM - Writing CLI Apps using Node.js
+-   11:00AM - Efficient Server-Client Code Sharing
+-   11:30AM - Design Patterns for Universal Apps - Builder
+-   12:00PM - Lunch Break
+-   1:00PM - Creating powerful interfaces on CLI apps with Blessed
+-   3:00PM - CLI Testing with the Native Node.js Test Runner
+-   2:00PM - Deploying the CLI App on an npm Registry
+-   4:00PM - Course Recap and Q&A

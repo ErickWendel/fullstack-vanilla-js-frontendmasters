@@ -24,10 +24,14 @@ Day 01
         - pre reqs
             - nodejs 22 (current LTS)
             - vscode
+            - Unix based systems (WSL (Windows Subsystem for Linux))
 
-    - Abstract Factory Design Pattern
+    - Design Patterns for Universal Apps - Abstract Factory Design Pattern
         - slides
             - show iPhone and Android analogy
+
+    - Writing Web Apps without Bundlers
+        goals
         - clone project
             - show structure
 
@@ -53,9 +57,172 @@ Day 01
             console.log('Hi from web')
             npm run cli
                 console.log('Hi from Node.js')
-    - Handling HTML Forms
 
+    - Listing items
+        - web/view.js
+            add all elements mapping
+
+            add row
+            render
+        - shared/controller.js
+            constructor
+            static init
+            #init
+                all but configures
+        -> web should list initialData
+
+    - Sharing Validation and Entity Layers
+        view.js
+            configureFormSubmit
+            notify
+            init
+        controller.js
+            #onSubmit
+            isValid
+            #init
+                add #onSubmit
+
+        -> web should alert when the fields are empty
+        view.js
+            resetForm
+            configureFormClear
+        controller.js
+            #init
+                configureFormClear
+        -> after submitting should clear inputs
+    - Deploying the Web App on GitHub Pages
+        - setup and deploy
+    - Day 1 Recap and Q&A
 
 
 Day 02
-    - .vscode
+    - Day 2 Introduction
+        - slides
+        - show demo
+
+    - Writing CLI Apps using Node.js
+        - ui/index.js
+            - add bin/bash on top
+
+        - chmod +x ui/index.js
+
+        package.json
+        npm link
+    - Setting up VSCode debugger
+        - .vscode
+        - package.json
+            - cli:dev
+        -> F5 debugger should work
+    - Design Patterns for Universal Apps - Builder
+        - slides
+    - Creating powerful interfaces on CLI apps with Blessed
+        - npm i blessed@0.1.81 blessed-contrib@4.11.0
+
+        console/layoutBuilder.js
+            .setScreen
+            .setLayoutComponent
+            .build
+        console/view.js
+            render(data) {}
+        -> should see "not implemented error"
+            view.js (only signatures)
+                configureFormClear
+                configureFormSubmit
+        -> open a new terminal and should see app title
+
+        layoutBuilder
+            setFormComponent
+                just create .form
+            build
+                add form
+        view
+            render() call setFormComponent
+
+        -> should see the white line
+        layoutBuilder
+            #createInputField
+            setFormComponent
+                add name, email and age inputs
+                nameInput.focus();
+
+        -> should be able to fill those inputs
+
+        layoutBuilder
+            #createButton
+            setFormComponent
+                add submit and clear button
+        -> should see buttons
+    layoutBuilder
+        setFormComponent
+            submitButton.on
+            form.on('submit', (data) => {
+                console.log(data)
+            })
+        -> should be able to go to next fields with shift and see results after clicking on submit
+    - Submitting forms from the terminal
+        layoutBuilder
+            setFormComponent
+                form.on('submit', (data) => {
+                    onSubmit
+                })
+
+                all this.#
+
+            -> error not implemented
+        view
+            notify // signature only
+            addRow // signature only
+        -> should see message when invalid
+        -> should data when valid
+        layoutBuilder
+            setFormComponent
+                clearButton.on
+        view.js
+            configureFormClear
+            configureFormSubmit
+            resetForm()
+        -> should clear form after submit
+    - Rendering table data on with blessed contrib
+        view
+            - #prepareData
+            render
+                setTable(template)
+        layoutBuilder
+            setTable
+                all
+        -> should see table rendering initial data
+        view
+            - addRow
+                all
+        -> should see data on table after submit
+    - CLI Testing with the Native Node.js Test Runner
+        - mkdir tests
+        - touch tests/app.test.js
+            describe('Controller Test Suite', () => {
+                it('should initialize blessed, submit a form, add row and clean up form', async (context) => {
+                    const view = new View();
+                    await Controller.init({ view: view });
+                });
+            });
+        - slides
+            - Problem and how to fix it
+        - npm i @erickwendel/mockImportsAndSpy
+
+        app.test.js
+            before(() => {
+                overrideModules([blessed, contrib]);
+            });
+        -> test should pass
+        app.test.js
+            all
+        -> test should pass
+    - Deploying the CLI App on an npm Registry
+        package.json
+        - author
+        - name
+        - npm login
+        - npm publish --access-public
+        - npm rm -g users-management-app
+        - npm i -g @erickwendel/users-management-app
+    - Course Recap and Q&A
+done :)
