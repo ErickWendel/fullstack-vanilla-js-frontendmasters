@@ -6,7 +6,7 @@ import assert from 'node:assert';
 
 import blessed from 'blessed';
 import contrib from 'blessed-contrib';
-import { overrideModules } from "@erickwendel/mock-imports-and-spy";
+import { overrideModules } from "./_helpers/mockImports.js";
 
 describe('Controller Test Suite', () => {
     before(() => {
@@ -19,6 +19,16 @@ describe('Controller Test Suite', () => {
         const screenMock = context.mock.method(blessed, "screen");
         const tableMockMock = context.mock.method(contrib, "table");
 
+        const onSubmit = context.mock.fn()
+        const onReset = context.mock.fn()
+
+        context.mock.method(blessed, 'form', (...args) => {
+            return {
+                on: onSubmit,
+                reset: onReset
+            }
+        })
+
         const addRow = context.mock.method(view, view.addRow.name);
         const resetForm = context.mock.method(view, view.resetForm.name);
 
@@ -27,12 +37,12 @@ describe('Controller Test Suite', () => {
         assert.strictEqual(screenMock.mock.callCount(), 1);
         assert.strictEqual(tableMockMock.mock.callCount(), 1);
 
-        const formCall = blessed.form.on.mock
-        assert.strictEqual(formCall.callCount(), 1);
+        const onSubmitMock = onSubmit.mock
+        assert.strictEqual(onSubmitMock.callCount(), 1);
 
-        const onSubmit = formCall.calls[0].arguments[1]
+        const onSubmitFn = onSubmitMock.calls[0].arguments[1]
         const data = { name: 'Erick Wendel', age: 28, email: 'e@e.com' }
-        onSubmit(data)
+        onSubmitFn(data)
 
         assert.strictEqual(addRow.mock.callCount(), 1)
         assert.strictEqual(resetForm.mock.callCount(), 1)
