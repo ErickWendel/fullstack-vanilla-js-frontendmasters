@@ -28,6 +28,7 @@
     "node": "v20.17.0"
   },
   "dependencies": {
+    "@erickwendel/mock-imports-and-spy": "^0.0.1",
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.11.0"
   },

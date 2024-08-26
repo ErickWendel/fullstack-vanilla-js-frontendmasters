@@ -6,7 +6,7 @@ import assert from 'node:assert';
 
 import blessed from 'blessed';
 import contrib from 'blessed-contrib';
-import { overrideModules } from "./_helpers/mockImports.js";
+import { overrideModules } from "@erickwendel/mock-imports-and-spy";
 
 describe('Controller Test Suite', () => {
     before(() => {
