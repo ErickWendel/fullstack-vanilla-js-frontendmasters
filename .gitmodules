@@ -1,3 +1,6 @@
 [submodule "fullstack-vanilla-js-frontendmasters"]
 	path = fullstack-vanilla-js-frontendmasters
 	url = https://github.com/ErickWendel/fullstack-vanilla-js-frontendmasters.git
+[submodule "fullstack-vanilla-js-fem-slides"]
+	path = fullstack-vanilla-js-fem-slides
+	url = https://github.com/ErickWendel/fullstack-vanilla-js-fem-slides.git
