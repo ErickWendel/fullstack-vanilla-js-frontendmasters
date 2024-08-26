@@ -32,8 +32,6 @@ Day 01
 
     - Writing Web Apps without Bundlers
         goals
-        - clone project
-            - show structure
 
     - Commonjs
         - slides

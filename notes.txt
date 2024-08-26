@@ -7,6 +7,8 @@ https://github.com/btholt/next-course-starter
 https://btholt.github.io/next-course-starter
 
 https://frontendmasters.com/workshops/fullstack-vanilla-js/
+https://frontendmasters.com/courses/vanilla-js-apps/
+https://firtman.github.io/vanilla
 
 ---
 
@@ -35,3 +37,63 @@ https://frontendmasters.com/workshops/fullstack-vanilla-js/
 -   3:00PM - CLI Testing with the Native Node.js Test Runner
 -   2:00PM - Deploying the CLI App on an npm Registry
 -   4:00PM - Course Recap and Q&A
+
+## Slides
+
+# Intro
+    ## Who I'am
+    ## What you're gonna learn
+        video
+    ## Focus in practicing, let me know what you think about it
+    ## pre reqs
+
+# Writing Web Apps without Bundlers
+    problem with webpack but not pure JS
+
+# Commonjs Problem
+        - slides
+        - Problem HTML vs JS Runtimes
+
+# Introducing ECMAScript Modules
+        - slides
+        - async / JS Spec / dynamic
+
+# Design Patterns for Universal Apps - Abstract Factory Design Pattern
+    - show iPhone and Android analogy
+
+# Starting up
+    - Startup from the Web app
+    - Will clone the project
+    - Use the same code for both Node.js and Web
+    - Share Validation Layers
+    - Publish the app in the GitHub Pages
+
+    ## understanding layers
+
+    ## clone project
+
+# Q&A & Recap
+
+# Writing CLI Apps using Node.js
+
+# Introduction
+    demo part 02
+
+# Setting up VSCode debugger
+
+# Design Patterns for Universal Apps - Builder
+
+# Creating powerful interfaces on CLI apps with Blessed
+    intro to blessed
+    intro to blessed contrib
+    examples
+
+# CLI Testing with the Native Node.js Test Runner
+    Intro to the nodejs test runner
+
+    ## Problem of mocking internal modules high coupled
+        https://www.npmjs.com/package/@erickwendel/mock-imports-and-spy
+
+# Deploying the CLI App on an npm Registry
+
+# Q&A & Recap
