@@ -1,6 +1,6 @@
-
 function createFnsAndPropertiesDynamically(originalObject = {}) {
     return new Proxy(originalObject, {
+        // when a value is requested (const screen = blessed.screen())
         get(target, property) {
 
             if (!(property in target)) {
@@ -9,19 +9,13 @@ function createFnsAndPropertiesDynamically(originalObject = {}) {
 
             return target[property];
         },
-        set(target, property, value) {
-
-            target[property] = createFnsAndPropertiesDynamically()
-            return true;
-        },
+        // when a function is called (blessed.screen())
         apply(target, thisArg, argumentsList) {
-
             return createFnsAndPropertiesDynamically()
         }
     });
 }
 
-// Function to override modules with proxies
 function overrideModules(modules) {
     modules.forEach(originalModule => {
         Object.keys(originalModule).forEach(key => {
