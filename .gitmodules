@@ -4,3 +4,6 @@
 [submodule "fullstack-vanilla-js-fem-slides"]
 	path = fullstack-vanilla-js-fem-slides
 	url = https://github.com/ErickWendel/fullstack-vanilla-js-fem-slides.git
+[submodule "initial-app-template"]
+	path = initial-app-template
+	url = https://github.com/ErickWendel/fullstack-vanilla-javaScript-fem-template.git
