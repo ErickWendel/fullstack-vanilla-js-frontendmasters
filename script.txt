@@ -50,6 +50,8 @@ Day 01
 
             - change ui/index.js
                 add dynamic import
+                    const path = globalThis.window ? 'web' : 'console'
+                    await import(`./../src/platforms/${path}/view.js`)
 
             > web should print hi from web
             console.log('Hi from web')

@@ -41,7 +41,7 @@ https://firtman.github.io/vanilla
 ## Slides
 
 # Intro
-    ## Who I'am
+    ## Who am I
     ## What you're gonna learn
         video
     ## Focus in practicing, let me know what you think about it
