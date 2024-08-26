@@ -1,0 +1,3 @@
+[submodule "fullstack-vanilla-js-frontendmasters"]
+	path = fullstack-vanilla-js-frontendmasters
+	url = https://github.com/ErickWendel/fullstack-vanilla-js-frontendmasters.git
