@@ -92,8 +92,12 @@ https://firtman.github.io/vanilla
     Intro to the nodejs test runner
 
     ## Problem of mocking internal modules high coupled
-        https://www.npmjs.com/package/@erickwendel/mock-imports-and-spy
+
 
 # Deploying the CLI App on an npm Registry
 
 # Q&A & Recap
+
+
+https://ui.dev/esmodules
+https://medium.com/design-patterns-with-python/hihih-2ce4b45624d6
