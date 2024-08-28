@@ -3,7 +3,7 @@
 > August 28 to 29, 2024 - 9:30am to 5:30pm Central Daylight Time
 
 
-<img src="https://static.frontendmasters.com/resources/2024-08-28-fullstack-vanilla-js/thumb.webp" width=300 />
+<img src="./cover.jpeg" width=300 />
 
 Acess the [slides](https://www.icloud.com/keynote/032Y1iBWTJMdLbFIw2A3F23VA#FullStack_Vanilla_JS_-_FEM_-_Erick_Wendel)
 ## Key Takeaways
