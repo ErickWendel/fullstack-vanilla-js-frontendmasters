@@ -7,3 +7,6 @@
 [submodule "initial-app-template"]
 	path = initial-app-template
 	url = https://github.com/ErickWendel/fullstack-vanilla-javaScript-fem-template.git
+[submodule "recorded/fullstack-vanilla-javaScript-fem-template"]
+	path = recorded/fullstack-vanilla-javaScript-fem-template
+	url = https://github.com/ErickWendel/fullstack-vanilla-javaScript-fem-template.git

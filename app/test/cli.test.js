@@ -8,7 +8,7 @@ import blessed from 'blessed';
 import contrib from 'blessed-contrib';
 import { overrideModules } from "./_helpers/mockImports.js";
 
-describe('Controller Test Suite', () => {
+describe('CLI Test Suite', () => {
     before(() => {
         overrideModules([blessed, contrib]);
     });
