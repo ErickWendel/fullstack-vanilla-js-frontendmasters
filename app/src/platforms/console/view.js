@@ -11,6 +11,7 @@ export default class View extends ViewBase {
 
     constructor(layoutBuilder = new LayoutBuilder()) {
         super()
+
         this.#layoutBuilder = layoutBuilder
     }
 
@@ -32,10 +33,7 @@ export default class View extends ViewBase {
     addRow(data) {
         this.#data.push(data)
         const template = this.#prepareData(this.#data)
-        this.#components.table.setData({
-            headers: template.headers,
-            data: template.data
-        })
+        this.#components.table.setData(template)
         this.#components.screen.render();
     }
 
@@ -46,7 +44,7 @@ export default class View extends ViewBase {
     }
 
     notify({ msg, isError }) {
-        this.#components.alert.setMessage(msg)
+        this.#components?.alert.setMessage(msg)
     }
 
     configureFormClear() {
@@ -61,11 +59,7 @@ export default class View extends ViewBase {
         }
     }
 
-    render(data) {
-        this.#data = data;
-
-        const template = this.#prepareData(data)
-
+    #initializeComponents() {
         this.#components = this.#layoutBuilder
             .setScreen({ title: 'Fullstack vanilla JS - Erick Wendel' })
             .setLayoutComponent()
@@ -74,7 +68,13 @@ export default class View extends ViewBase {
                 onClear: this.#onFormClear,
             })
             .setAlertComponent()
-            .setTable(template)
+            .setTable({ numColumns: 3 })
             .build()
+    }
+
+    render(items) {
+        this.#initializeComponents()
+        items.forEach(item => this.addRow(item))
+
     }
 }

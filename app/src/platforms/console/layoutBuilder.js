@@ -49,10 +49,6 @@ export default class LayoutBuilder {
             label
         });
 
-
-
-
-
         return input
     }
 
@@ -123,7 +119,6 @@ export default class LayoutBuilder {
             bottom: 1
         });
 
-
         submitButton.on('press', () => form.submit());
 
         form.on('submit', (data) => {
@@ -141,14 +136,13 @@ export default class LayoutBuilder {
         return this;
     }
 
-    setTable(template) {
-        const numColumns = template.headers.length;
-
+    setTable({ numColumns }) {
         const calculateColumnWidth = () => Math.floor(this.#layout.width / numColumns);
         const columnWidth = calculateColumnWidth();
 
         const minColumnWidth = 10;
-        const columnWidths = Array(numColumns).fill(columnWidth).map(width => Math.max(width, minColumnWidth));
+        const columnWidths = Array(numColumns)
+            .fill(columnWidth).map(width => Math.max(width, minColumnWidth));
 
         this.#table = contrib.table({
             mouse: true,
@@ -171,11 +165,6 @@ export default class LayoutBuilder {
             border: { type: 'line', fg: 'cyan' },
             columnSpacing: 2,
             columnWidth: columnWidths
-        });
-
-        this.#table.setData({
-            headers: template.headers,
-            data: template.data
         });
 
         return this;
@@ -224,8 +213,6 @@ export default class LayoutBuilder {
             buttons: this.#buttons,
             alert: this.#alert
         };
-
-        this.#screen.render();
 
         return components;
     }
