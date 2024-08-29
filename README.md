@@ -1,5 +1,8 @@
 # Fullstack Vanilla JavaScript
 
+![Build Status](https://github.com/ErickWendel/fullstack-vanilla-js-frontendmasters/workflows/Run%20tests/badge.svg)
+
+
 > August 28 to 29, 2024 - 9:30am to 5:30pm Central Daylight Time
 
 
