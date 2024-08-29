@@ -354,6 +354,8 @@ Day 02
         git push
         -> should pass
 
-
+    - update the package on npm
+        npm version patch
+        npm publish --access-public
     - Course Recap and Q&A
 done :)
