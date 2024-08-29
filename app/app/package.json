@@ -17,7 +17,7 @@
     "web": "npx browser-sync './' ui/",
     "cli": "node ui/index.js",
     "cli:dev": "node --inspect --watch ui/index.js",
-    "test:dev": "node --inspect --watch --test tests/",
+    "test:dev": "node --inspect --watch --test test/",
     "test": "node  --experimental-test-coverage --test test/"
   },
   "keywords": [],

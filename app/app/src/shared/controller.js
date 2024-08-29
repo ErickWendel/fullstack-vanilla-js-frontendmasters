@@ -14,9 +14,9 @@ export default class Controller {
         this.#service = service
     }
 
-    static init(deps) {
+    static async init(deps) {
         const controller = new Controller(deps)
-        controller.#init()
+        await controller.#init()
         return controller
     }
 
