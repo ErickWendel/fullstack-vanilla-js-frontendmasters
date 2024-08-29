@@ -108,13 +108,7 @@ Day 02
 
         package.json
         npm link
-    - Setting up VSCode debugger
-        - .vscode
-        - package.json
-            - cli:dev
-        -> F5 debugger should work
-    - Design Patterns for Universal Apps - Builder
-        - slides
+
     - Creating powerful interfaces on CLI apps with Blessed
         - npm i blessed@0.1.81 blessed-contrib@4.11.0
 
@@ -123,7 +117,16 @@ Day 02
             .setLayoutComponent
             .build
         console/view.js
-            render(data) {}
+            #initializeComponents()
+                this.#components = this.#layoutBuilder
+                    .setScreen({ title: 'Fullstack vanilla JS - Erick Wendel' })
+                    .setLayoutComponent()
+                    .build()
+
+            render(data) {
+                #initializeComponents()
+            }
+
         -> should see "not implemented error"
             view.js (only signatures)
                 configureFormClear
@@ -136,7 +139,7 @@ Day 02
             build
                 add form
         view
-            render() call setFormComponent
+            #initializeComponents() call setFormComponent
 
         -> should see the white line
         layoutBuilder
@@ -159,6 +162,7 @@ Day 02
                 console.log(data)
             })
         -> should be able to go to next fields with shift and see results after clicking on submit
+
     - Submitting forms from the terminal
         layoutBuilder
             setFormComponent
@@ -175,6 +179,15 @@ Day 02
         -> should see message when invalid
         -> should data when valid
         layoutBuilder
+            setAlertComponent
+                all
+        view
+            notify
+            #initializeComponents
+                add setAlertComponent
+        -> should be able to see the error message
+
+        layoutBuilder
             setFormComponent
                 clearButton.on
         view.js
@@ -182,40 +195,27 @@ Day 02
             configureFormSubmit
             resetForm()
         -> should clear form after submit
+
     - Rendering table data on with blessed contrib
-        view
-            - #prepareData
-            render
-                setTable(template)
         layoutBuilder
             setTable
                 all
-        -> should see table rendering initial data
         view
+            #initializeComponents
+                setTable
+        -> should see an empty table
+        view
+            - #prepareData
+
             - addRow
                 all
-        -> should see data on table after submit
-    - CLI Testing with the Native Node.js Test Runner
-        - mkdir tests
-        - touch tests/app.test.js
-            describe('Controller Test Suite', () => {
-                it('should initialize blessed, submit a form, add row and clean up form', async (context) => {
-                    const view = new View();
-                    await Controller.init({ view: view });
-                });
-            });
-        - slides
-            - Problem and how to fix it
-        - npm i @erickwendel/mockImportsAndSpy
+        view
+            render
+                items.forEach(item => this.addRow(item))
 
-        app.test.js
-            before(() => {
-                overrideModules([blessed, contrib]);
-            });
-        -> test should pass
-        app.test.js
-            all
-        -> test should pass
+        -> should see table rendering initial data
+        -> should see data on table after submit
+
     - Deploying the CLI App on an npm Registry
         package.json
         - author
@@ -224,5 +224,136 @@ Day 02
         - npm publish --access-public
         - npm rm -g users-management-app
         - npm i -g @erickwendel/users-management-app
+
+    - Creating the Web API
+        mkdir app
+        move all to app
+        mkdir web-api
+
+        web-api
+            npm init -y
+            mkdir src
+            touch src/index.js
+
+            src/index.js
+                create a simple http server
+            -> should be able to curl with hello world
+            touch run-api.sh
+                curl users
+            -> should be able to see the hello world
+
+            touch handler.js
+                function handler
+                    all until allRoutes
+            touch util/util.js
+                all
+
+            handler.js
+                allRoutes
+                    only 404
+                handler
+                    add promise without handle error
+
+            -> curl now should return 404
+
+            mkdir routes/userRoutes.js
+
+                /users:get
+                    return mocked
+
+                /users:post
+            handler
+                allRoutes
+                    add userRoutes
+            -> should be able to see mocked data
+            mkdir database/data.json
+                add empty array
+
+            mkdir repositories/userRepository
+                only find
+            mkdir services/userService
+                only find
+            mkdir factories/userFactory
+                all
+            handler
+                add userService to userRoutes
+            userRoutes
+                /users:get
+                    all
+
+            -> curl should return empty array
+
+            add mocked object to data.json
+            -> curl should return data
+        - Creating users
+        userRoute
+            /users:post
+                log item
+
+        run-api.sh
+            add curl post
+        -> should show item coming
+
+        userRepository
+            create
+                all
+        userService
+            create
+
+        userRoute
+            /users:post
+                all
+        -> should save items on data.json and list
+
+    - Integrating the API with the apps
+        touch app/shared/service.js
+            all
+        ui/index.js
+            add service to controller
+        shared/controller
+            add service on constructor
+            #getFromAPI()
+            #init()
+                add getFromAPI()
+        -> should be able to list from api
+
+        controller
+            pushToAPI
+                all
+            #onSubmit
+                add pushToAPI
+        -> should be able to save on api and after refresh load it from there
+        -> CLI should also work
+    - Fixing tests
+        controller.test.js
+            add to Controller.init
+
+             service: {
+                createUser: mock.fn(async () => ({})),
+                getUsers: mock.fn(async () => []),
+            }
+        web.test.js
+            add to Controller.init
+
+             service: {
+                createUser: mock.fn(async () => ({})),
+                getUsers: mock.fn(async () => []),
+            }
+        tests should now pass
+
+
+    - web-api
+        mkdir tests/e2e
+            touch user.test.js
+                all
+        -> test should pass
+
+    - GitHub Action
+        update run_tests
+
+        git push
+        -> should pass
+
+
     - Course Recap and Q&A
 done :)

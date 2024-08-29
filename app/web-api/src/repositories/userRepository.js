@@ -3,7 +3,7 @@ import {
   writeFile
 } from 'node:fs/promises'
 
-export default class HeroRepository {
+export default class UserRepository {
   constructor({
     file
   }) {
