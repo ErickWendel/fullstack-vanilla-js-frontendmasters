@@ -8,7 +8,7 @@
     "start": "node src/index.js",
     "dev": "node --inspect --watch src/index.js",
     "test:dev": "NODE_ENV=test node --inspect --watch --test tests/",
-    "test": "NODE_ENV=test node --test tests/"
+    "test": "NODE_ENV=test node --experimental-test-coverage --test tests/"
   },
   "keywords": [],
   "author": "erickwendel",
