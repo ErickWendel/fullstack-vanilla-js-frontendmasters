@@ -46,7 +46,7 @@ export default class View extends ViewBase {
     }
 
     notify({ msg, isError }) {
-        console.log({ msg, isError })
+        this.#components.alert.setMessage(msg)
     }
 
     configureFormClear() {
@@ -73,6 +73,7 @@ export default class View extends ViewBase {
                 onSubmit: this.#onFormSubmit,
                 onClear: this.#onFormClear,
             })
+            .setAlertComponent()
             .setTable(template)
             .build()
     }

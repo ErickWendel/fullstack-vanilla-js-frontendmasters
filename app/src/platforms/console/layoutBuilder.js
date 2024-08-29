@@ -8,6 +8,7 @@ export default class LayoutBuilder {
     #form;
     #inputs = {};
     #buttons = {};
+    #alert
 
     #createButton({ parent, name, content, bg, fg, left, bottom }) {
         return blessed.button({
@@ -48,10 +49,10 @@ export default class LayoutBuilder {
             label
         });
 
-        // input.on('click', () => {
-        //     input.focus()
-        //     this.#screen.render();
-        // });
+
+
+
+
         return input
     }
 
@@ -146,11 +147,10 @@ export default class LayoutBuilder {
         const calculateColumnWidth = () => Math.floor(this.#layout.width / numColumns);
         const columnWidth = calculateColumnWidth();
 
-        const minColumnWidth = 10; // Minimum column width in pixels
+        const minColumnWidth = 10;
         const columnWidths = Array(numColumns).fill(columnWidth).map(width => Math.max(width, minColumnWidth));
 
         this.#table = contrib.table({
-            // border: 'line',
             mouse: true,
             scrollboard: {
                 ch: ' ',
@@ -164,12 +164,12 @@ export default class LayoutBuilder {
             selectedBg: 'blue',
             interactive: true,
             label: 'Users',
-            width: '100%',  // Full width of the parent container
-            height: '50%',  // Adjust height as needed
+            width: '100%',
+            height: '50%',
             top: '0',
-            left: '0',      // Adjust positioning as needed
+            left: '0',
             border: { type: 'line', fg: 'cyan' },
-            columnSpacing: 2, // Adjust spacing between columns
+            columnSpacing: 2,
             columnWidth: columnWidths
         });
 
@@ -181,6 +181,40 @@ export default class LayoutBuilder {
         return this;
     }
 
+    setAlertComponent() {
+        this.#alert = blessed.box({
+            parent: this.#form,
+            width: '40%',
+            height: '20%',
+            bottom: 0,
+            border: {
+                type: 'line'
+            },
+            style: {
+                fg: 'black',
+                bg: 'red',
+            },
+            content: '',
+            tags: true,
+            align: 'center',
+            hidden: true,
+        });
+
+        this.#alert.setMessage = (message) => {
+            this.#alert.setContent(`{bold}${message}{/bold}`);
+            this.#alert.show();
+            this.#screen.render();
+
+            setTimeout(() => {
+                this.#alert.hide();
+                this.#screen.render();
+            }, 3000);
+        }
+
+        return this;
+    }
+
+
     build() {
         const components = {
             screen: this.#screen,
@@ -188,6 +222,7 @@ export default class LayoutBuilder {
             form: this.#form,
             inputs: this.#inputs,
             buttons: this.#buttons,
+            alert: this.#alert
         };
 
         this.#screen.render();
