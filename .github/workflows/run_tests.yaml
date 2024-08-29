@@ -26,7 +26,7 @@ jobs:
         run: npm ci
         working-directory: app/app
 
-      - name: Run Tests for app/app
+      - name: Run Tests for app
         run: npm test
         working-directory: app/app
 
